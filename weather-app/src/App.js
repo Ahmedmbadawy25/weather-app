@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import Header from './components/Header';
 import FetchParseData from './components/FetchParseData';
+import WeatherGraph from './components/WeatherGraph';
 
 function App() {
   const [isFetchingData, setIsFetchingData] = React.useState(true);
@@ -11,6 +12,7 @@ function App() {
     FetchParseData()
       .then((data) => {
         setWeatherData(data);
+        console.log(data['2024-08-19']);
         setIsFetchingData(false);
       })
       .catch((error) => {
@@ -26,7 +28,7 @@ function App() {
   return (
     <div>
       <Header />
-
+      <WeatherGraph data={weatherData['2024-08-19']} variable="temperature2m" />
     </div>
   );
 }

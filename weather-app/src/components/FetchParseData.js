@@ -45,20 +45,40 @@ async function FetchParseData() {
     };
 
     // `weatherData` now contains a simple structure with arrays for datetime and weather data
-    for (let i = 0; i < weatherData.hourly.time.length; i++) {
-        console.log(
-            weatherData.hourly.time[i].toISOString(),
-            weatherData.hourly.temperature2m[i],
-            weatherData.hourly.relativeHumidity2m[i],
-            weatherData.hourly.apparentTemperature[i],
-            weatherData.hourly.rain[i],
-            weatherData.hourly.weatherCode[i],
-            weatherData.hourly.visibility[i],
-            weatherData.hourly.uvIndex[i]
-        );
-    }
+    // for (let i = 0; i < weatherData.hourly.time.length; i++) {
+    //     console.log(
+    //         weatherData.hourly.time[i].toISOString(),
+    //         weatherData.hourly.temperature2m[i],
+    //         weatherData.hourly.relativeHumidity2m[i],
+    //         weatherData.hourly.apparentTemperature[i],
+    //         weatherData.hourly.rain[i],
+    //         weatherData.hourly.weatherCode[i],
+    //         weatherData.hourly.visibility[i],
+    //         weatherData.hourly.uvIndex[i]
+    //     );
+    // }
 
-    return weatherData;
+    const sortedData = weatherData.hourly.time.map((time, index) => ({
+        time: time.toISOString(),
+        temperature2m: weatherData.hourly.temperature2m[index],
+        relativeHumidity2m: weatherData.hourly.relativeHumidity2m[index],
+        apparentTemperature: weatherData.hourly.apparentTemperature[index],
+        rain: weatherData.hourly.rain[index],
+        weatherCode: weatherData.hourly.weatherCode[index],
+        visibility: weatherData.hourly.visibility[index],
+        uvIndex: weatherData.hourly.uvIndex[index],
+    }));
+
+    const groupedByDayData = sortedData.reduce((acc, curr) => {
+        const date = curr.time.split('T')[0];
+        if (!acc[date]) {
+            acc[date] = [];
+        }
+        acc[date].push(curr);
+        return acc;
+    }, {});
+
+    return groupedByDayData;
 }
 
 export default FetchParseData;
