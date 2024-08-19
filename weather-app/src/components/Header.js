@@ -7,8 +7,7 @@ const Header = () => {
         <header className="header">
             <div className="logo">
                 <FaSun className='sun' />
-                <h1 className='h1'>Weather App</h1>
-
+                <h1 className='h1'>Weather - New Cairo, Cairo</h1>
             </div>
         </header>
     );
