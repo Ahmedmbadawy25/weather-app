@@ -44,20 +44,6 @@ async function FetchParseData() {
 
     };
 
-    // `weatherData` now contains a simple structure with arrays for datetime and weather data
-    // for (let i = 0; i < weatherData.hourly.time.length; i++) {
-    //     console.log(
-    //         weatherData.hourly.time[i].toISOString(),
-    //         weatherData.hourly.temperature2m[i],
-    //         weatherData.hourly.relativeHumidity2m[i],
-    //         weatherData.hourly.apparentTemperature[i],
-    //         weatherData.hourly.rain[i],
-    //         weatherData.hourly.weatherCode[i],
-    //         weatherData.hourly.visibility[i],
-    //         weatherData.hourly.uvIndex[i]
-    //     );
-    // }
-
     const sortedData = weatherData.hourly.time.map((time, index) => ({
         time: time.toISOString(),
         temperature2m: weatherData.hourly.temperature2m[index],
