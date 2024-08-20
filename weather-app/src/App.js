@@ -4,6 +4,7 @@ import Header from './components/Header';
 import FetchParseData from './components/FetchParseData';
 import WeatherGraph from './components/WeatherGraph';
 import DateTabs from './components/DateTabs';
+import LoadingScreen from './components/LoadingScreen';
 
 function App() {
   const [isFetchingData, setIsFetchingData] = React.useState(true);
@@ -24,7 +25,12 @@ function App() {
   }, []);
 
   if (isFetchingData) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Header />
+        <LoadingScreen />
+      </div>
+    )
   }
 
   const handleDateChange = (date) => {
