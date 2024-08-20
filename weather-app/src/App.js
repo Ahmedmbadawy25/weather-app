@@ -3,16 +3,18 @@ import React from 'react';
 import Header from './components/Header';
 import FetchParseData from './components/FetchParseData';
 import WeatherGraph from './components/WeatherGraph';
+import DateTabs from './components/DateTabs';
 
 function App() {
   const [isFetchingData, setIsFetchingData] = React.useState(true);
   const [weatherData, setWeatherData] = React.useState(null);
+  const [selectedDate, setSelectedDate] = React.useState(null);
 
   React.useEffect(() => {
     FetchParseData()
       .then((data) => {
         setWeatherData(data);
-        console.log(data['2024-08-19']);
+        setSelectedDate(Object.keys(data)[0]);
         setIsFetchingData(false);
       })
       .catch((error) => {
@@ -25,10 +27,15 @@ function App() {
     return <div>Loading...</div>;
   }
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  }
+
   return (
     <div>
       <Header />
-      <WeatherGraph data={weatherData['2024-08-19']} variable="temperature2m" />
+      <DateTabs dates={Object.keys(weatherData)} selectedDate={selectedDate} onSelectDate={handleDateChange} />
+      <WeatherGraph data={weatherData[selectedDate]} variable="temperature2m" />
     </div>
   );
 }
