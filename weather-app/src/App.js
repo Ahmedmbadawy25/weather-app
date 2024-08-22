@@ -36,12 +36,14 @@ function App() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   }
+  console.log(weatherData);
 
   return (
     <div>
       <Header />
       <DateTabs dates={Object.keys(weatherData)} selectedDate={selectedDate} onSelectDate={handleDateChange} />
       <WeatherGraph data={weatherData[selectedDate]} variable="temperature2m" />
+      <WeatherGraph data={weatherData[selectedDate]} variable="uvIndex" />
     </div>
   );
 }

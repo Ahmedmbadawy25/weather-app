@@ -41,9 +41,9 @@ const WeatherGraph = ({ data, variable }) => {
     const hours = [ ...Array(24).keys() ].filter((h) => h % 2 === 0);
 
     return (
-        <LineChart width={800} height={300} data={data}>
+        <LineChart width={700} height={300} data={data}>
             <XAxis data={hours} interval={1} tickFormatter={(hour) => `${hour}:00`} />
-            <YAxis domain={[minTemperature-2, maxTemperature+2]} />
+            <YAxis domain={[minTemperature, maxTemperature]} />
             <Tooltip 
                 formatter={(value) => Math.round(value)}
                 contentStyle={{ backgroundColor: '#f5f5f5', border: '1px solid #e5e5e5' }}
