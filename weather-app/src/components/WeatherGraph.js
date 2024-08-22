@@ -32,6 +32,15 @@ const weatherCodes = {
     99: 'Thunderstorm with heavy hail',
 };
 
+const variableNames = {
+    temperature2m: 'Temperature (°C)',
+    relativeHumidity2m: 'Relative Humidity (%)',
+    apparentTemperature: 'Apparent Temperature (°C)',
+    rain: 'Rain (mm/h)',
+    visibility: 'Visibility (m)',
+    uvIndex: 'UV Index',
+};
+
 const WeatherGraph = ({ data, variable }) => {
     let minTemperature = Math.min(...data.map((d) => d[variable]));
     let maxTemperature = Math.max(...data.map((d) => d[variable]));
@@ -41,11 +50,11 @@ const WeatherGraph = ({ data, variable }) => {
     const hours = [ ...Array(24).keys() ].filter((h) => h % 2 === 0);
 
     return (
-        <LineChart width={700} height={300} data={data}>
+        <LineChart width={700} height={350} data={data}>
             <XAxis data={hours} interval={1} tickFormatter={(hour) => `${hour}:00`} />
-            <YAxis domain={[minTemperature, maxTemperature]} />
-            <Tooltip 
-                formatter={(value) => Math.round(value)}
+            <YAxis domain={[minTemperature, maxTemperature]} label={{ value: variableNames[variable], angle: -90, position: 'insideLeft', fontSize: 12 }} />
+            <Tooltip
+                formatter={(value) => [`${variableNames[variable]}: ${Math.round(value)} `]}
                 contentStyle={{ backgroundColor: '#f5f5f5', border: '1px solid #e5e5e5' }}
                 labelFormatter={(value) => `${value}:00 - ${weatherCodes[data[value].weatherCode]}`}
             />

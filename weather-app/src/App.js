@@ -24,15 +24,6 @@ function App() {
       });
   }, []);
 
-  if (isFetchingData) {
-    return (
-      <div>
-        <Header />
-        <LoadingScreen />
-      </div>
-    )
-  }
-
   const handleDateChange = (date) => {
     setSelectedDate(date);
   }
@@ -41,9 +32,37 @@ function App() {
   return (
     <div>
       <Header />
-      <DateTabs dates={Object.keys(weatherData)} selectedDate={selectedDate} onSelectDate={handleDateChange} />
-      <WeatherGraph data={weatherData[selectedDate]} variable="temperature2m" />
-      <WeatherGraph data={weatherData[selectedDate]} variable="uvIndex" />
+      {isFetchingData ? (
+        <LoadingScreen />
+      ) : (
+        <div>
+          <DateTabs dates={Object.keys(weatherData)} selectedDate={selectedDate} onSelectDate={handleDateChange} />
+          <div className="content-container">
+          </div>
+
+          <div className="grid-container">
+
+            <div className="content-container">
+              <WeatherGraph data={weatherData[selectedDate]} variable="temperature2m" />
+            </div>
+            <div className="content-container">
+              <WeatherGraph data={weatherData[selectedDate]} variable="uvIndex" />
+            </div>
+
+            <div className="content-container">
+              <WeatherGraph data={weatherData[selectedDate]} variable="apparentTemperature" />
+            </div>
+            <div className="content-container">
+              <WeatherGraph data={weatherData[selectedDate]} variable="rain" />
+            </div>
+
+            <div className="content-container">
+              <WeatherGraph data={weatherData[selectedDate]} variable="relativeHumidity2m" />
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 }
