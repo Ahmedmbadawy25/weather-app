@@ -2,7 +2,7 @@ import React from 'react';
 
 const DateTabs = ({ dates, selectedDate, onSelectDate }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
         {dates.map((date) => (
             <div
                 key={date}

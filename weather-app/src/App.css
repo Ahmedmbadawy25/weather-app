@@ -56,3 +56,14 @@
   grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns as needed */
   gap: 10px; /* Adjust the gap between components */
 }
+
+/* Example media query for screens narrower than 600px */
+@media screen and (max-width: 750px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+
+  .content-container {
+    margin: 5px; /* Reduce margin for smaller spacing */
+  }
+}
